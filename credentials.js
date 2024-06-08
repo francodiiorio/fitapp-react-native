@@ -1,13 +1,14 @@
 import { initializeApp } from "firebase/app";
+import { API_KEY, AUTH_DOMAIN, PROYECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from '@env'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBrTxppbgyzllmmywnQxpxr4UGjCh_kk_A",
-  authDomain: "fitapp-react-native.firebaseapp.com",
-  projectId: "fitapp-react-native",
-  storageBucket: "fitapp-react-native.appspot.com",
-  messagingSenderId: "1026664357773",
-  appId: "1:1026664357773:web:69d3bfd51ca462d0ade7c4"
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROYECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID
 };
 
 
