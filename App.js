@@ -3,8 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LoginPage from './screens/Login/LoginPage';
+import excerciseListPage from './screens/ExcerciseList/ExcerciseListPage';
 
 const Stack = createNativeStackNavigator();
+
 
 export default function App() {
   return (
@@ -15,11 +17,16 @@ export default function App() {
           component={BottomTabNavigator}
           options={{headerShown: false}}
         />
-        <Stack.Screen 
+        <Stack.Screen
           name='Login'
           component={LoginPage}
           options={{headerShown: false}}
-        />
+          />
+<Stack.Screen 
+        name='ExcerciseListPage'
+        component={excerciseListPage}              
+
+/>
       </Stack.Navigator>
     </NavigationContainer>
   );
