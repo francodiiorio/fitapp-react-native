@@ -1,14 +1,5 @@
+const ExcerciseListPage = () => {
+  return <Text> PAGINA DE LISTA DE EJERCICIOS</Text>;
+};
 
-const excerciseListPage =  ()=> {
-
-    return(
-
-
-        <Text> PAGINA DE LISTA DE EJERCICIOS</Text>
-    )
-
-    
-    
-}
-
-export default excerciseListPage
+export default ExcerciseListPage;

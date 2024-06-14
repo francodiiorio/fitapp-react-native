@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Excercise from "../../components/Excercise/index.js";
 import listOfExcercises from "../../services/Excercises/index.js";
 import { useFocusEffect, useNavigation, NavigationConteiner } from "@react-navigation/native";
-import excerciseListPage from "../ExcerciseList/ExcerciseListPage.jsx";
+import ExcerciseListPage from "../ExcerciseList/ExcerciseListPage.jsx";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator()
