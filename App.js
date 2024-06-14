@@ -3,9 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LoginPage from './screens/Login/LoginPage';
-import excerciseListPage from './screens/ExcerciseList/ExcerciseListPage';
+import ExcerciseListPage from './screens/ExcerciseList/ExcerciseListPage';
 
 const Stack = createNativeStackNavigator();
+
+
 
 
 export default function App() {
@@ -24,7 +26,7 @@ export default function App() {
           />
 <Stack.Screen 
         name='ExcerciseListPage'
-        component={excerciseListPage}              
+        component={ExcerciseListPage}              
 
 />
       </Stack.Navigator>
