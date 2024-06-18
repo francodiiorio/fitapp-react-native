@@ -16,9 +16,10 @@ const firebaseConfig = {
   messagingSenderId: MESSAGING_SENDER_ID,
   appId: APP_ID
 };
-// console.log(firebaseConfig.apiKey)
+ console.log(firebaseConfig.apiKey)
 
 
 const appFirebase = initializeApp(firebaseConfig);
+
 
 export default appFirebase
