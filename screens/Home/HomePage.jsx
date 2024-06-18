@@ -24,11 +24,6 @@ const HomePage = () => {
                 <Text style={styles.title}>FittApp</Text>
                 <Text style={styles.subtitle}>Bienvenido/a a tu app de fitness</Text>
             </View>
-            <Text style={styles.adviceTitle}>Consejo del día</Text>
-            <View style={styles.exercisesContainer}>
-                
-                <Text style={styles.adviceText}>{consejo}</Text>
-            </View>
             <View style={styles.exercisesContainer}>
                 <Text style={styles.excerciseTitle}>Ejercicios Populares</Text>
                 <FlatList
@@ -44,7 +39,11 @@ const HomePage = () => {
                     contentContainerStyle={styles.carousel}
                 />
             </View>
-            
+            <Text style={styles.adviceTitle}>Consejo del día</Text>
+            <View style={styles.exercisesContainer}>
+                
+                <Text style={styles.adviceText}>{consejo}</Text>
+            </View>
         </SafeAreaView>
     );
 }
