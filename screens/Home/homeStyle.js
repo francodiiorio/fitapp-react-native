@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { COLORS } from "../../constants/theme";
 
 const { width } = Dimensions.get('window');
 
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     },
     exercisesContainer: {
         marginTop: 20,
-        backgroundColor: '#FEA28F',
+        backgroundColor: COLORS.primary,
         borderRadius: 10,
         padding: 20,
         marginBottom: 20 * 2,
