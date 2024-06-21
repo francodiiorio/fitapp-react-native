@@ -30,7 +30,7 @@ const HomePage = () => {
                     data={cardsData}
                     renderItem={({ item }) => (
                         <View style={{ width: width * 0.8 }}>
-                            <Excercise excercise={item.excercise} group={item.group} />
+                            <Excercise excercise={item} group={item.group} />
                         </View>
                     )}
                     keyExtractor={(item, index) => index.toString()}
