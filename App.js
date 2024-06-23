@@ -5,28 +5,59 @@ import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LoginPage from "./screens/Login/LoginPage";
 import ExcerciseListPage from "./screens/ExcerciseList/ExcerciseListPage";
 
+import { useEffect, useState } from "react";
+import { appFirebase, auth } from "./credentials";
+import AuthContext, { defaultAuthData } from "./services/AuthContext";
+import AsyncStorage from "./services/AsyncStorage";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [authData, setAuthData] = useState(defaultAuthData);
+
+  useEffect(() => {
+    AsyncStorage.getData("authData").then((data) => {
+      console.log("Encontro algo???", data);
+      if (data) {
+        setAuthData(data);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (authData) {
+        console.log("Usuario logueado");
+        AsyncStorage.storeData("authData", authData);
+      } else {
+        console.log("Usuario deslogueado");
+        AsyncStorage.clearAll();
+      }
+    });
+  }, [authData]);
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Bottom Navigation"
-          component={BottomTabNavigator}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginPage}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ExcerciseListPage"
-          component={ExcerciseListPage}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthContext.Provider value={{ authData, setAuthData }}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Bottom Navigation"
+            component={BottomTabNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ExcerciseListPage"
+            component={ExcerciseListPage}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
