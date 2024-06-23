@@ -1,14 +1,17 @@
 import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styles from './loginStyle'
 import appFirebase from '../../credentials'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native'
+import AuthContext from '../../services/AuthContext'
 
 
 const auth = getAuth(appFirebase)
 
 const LoginPage = (props) => {
+
+    const { setAuthData } = useContext(AuthContext)
 
     const navigation = useNavigation()
     const [email, setEmail] = useState()
@@ -16,7 +19,8 @@ const LoginPage = (props) => {
 
     const login = async() => {
         try {
-            await signInWithEmailAndPassword(auth, email, password)
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+            setAuthData(userCredential)
             navigation.navigate("Home");
         }
         catch(error) {
