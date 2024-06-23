@@ -36,6 +36,8 @@ const LoginPage = (props) => {
             <View style={styles.text_container_item}>
                 <TextInput style={styles.textInput} 
                     placeholder='Correo electronico'
+                    keyboardType="email-address"
+                    autoCapitalize="none"
                     onChangeText={(text)=>setEmail(text)}
                 />
             </View>
@@ -43,6 +45,7 @@ const LoginPage = (props) => {
             <View style={styles.text_container_item}>
                 <TextInput style={styles.textInput} 
                     placeholder='Contraseña' 
+                    autoCapitalize="none"
                     secureTextEntry={true}
                     onChangeText={(text)=>setPassword(text)}
                 />
