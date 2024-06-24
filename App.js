@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LoginPage from "./screens/Login/LoginPage";
 import ExcerciseListPage from "./screens/ExcerciseList/ExcerciseListPage";
+import RegisterPage from "./screens/Register/RegisterPage";
 
 import { useEffect, useState } from "react";
 import { appFirebase, auth } from "./credentials";
@@ -54,6 +55,11 @@ export default function App() {
           <Stack.Screen
             name="ExcerciseListPage"
             component={ExcerciseListPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="RegisterPage"
+            component={RegisterPage}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
