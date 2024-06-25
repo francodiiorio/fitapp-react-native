@@ -1,6 +1,5 @@
 import { Text } from "react-native";
 import { Card } from "@rneui/themed";
-
 export default ({ excercise: excercise }) => {
   return (
     <Card>

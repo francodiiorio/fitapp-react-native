@@ -5,21 +5,23 @@ import Excercise from "../../components/Excercise/index.js";
 import listOfExcercises from "../../services/Excercises/index.js";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
-const ExercisesPage = ({ route }) => {
-  const { type } = route.params;
+const ExercisesListPage = ({ route }) => {
+  const { category } = route.params;
   const navigation = useNavigation();
   const [excercises, setExcercises] = useState([]);
+
+  const goToExcerciseDetail = (item) => {
+    navigation.navigate("ExcerciseDetailPage", { item });
+  };
 
   // console.log(type);
 
   useFocusEffect(
     useCallback(() => {
-      console.log("FOCUSsSsS");
-
       listOfExcercises
         .getExcersices()
         .then((list) => {
-          const filtrado = list.filter((x) => x.type === type);
+          const filtrado = list.filter((x) => x.category === category.name);
 
           setExcercises(filtrado);
         })
@@ -37,10 +39,12 @@ const ExercisesPage = ({ route }) => {
       <FlatList
         data={excercises}
         renderItem={({ item }) => (
+          
+          
           <TouchableOpacity
-            onPress={() => {
-              console.log("NAVEGA A DETALLE DEL EJERCICIO");
-            }}
+          onPress={() => {
+            goToExcerciseDetail(item);
+          }}
           >
             <Excercise excercise={item} />
           </TouchableOpacity>
@@ -50,4 +54,4 @@ const ExercisesPage = ({ route }) => {
   );
 };
 
-export default ExercisesPage;
+export default ExercisesListPage;

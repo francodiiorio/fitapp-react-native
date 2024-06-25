@@ -11,6 +11,7 @@ import { appFirebase, auth } from "./credentials";
 import AuthContext, { defaultAuthData } from "./services/AuthContext";
 import AsyncStorage from "./services/AsyncStorage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import ExerciseDetailPage from "./screens/ExcerciseDetail/ExcerciseDetailPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +63,12 @@ export default function App() {
             component={RegisterPage}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="ExcerciseDetailPage"
+            component={ExerciseDetailPage}
+            options={{ headerShown: false }}
+          />
+          
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
