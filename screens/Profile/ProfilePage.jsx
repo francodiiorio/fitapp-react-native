@@ -6,7 +6,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { appFirebase } from "../../credentials";
 import AuthContext from "../../services/AuthContext";
 import { LineChart } from "react-native-chart-kit";
-import userServices from "../../services/User/userServices";
+import {valoresDePrueba} from "../../services/User/userServices";
 
 const auth = getAuth(appFirebase);
 
@@ -33,10 +33,10 @@ const ProfilePage = () => {
           <View>
             <LineChart
               data={{
-                labels: userServices.fechas,
+                labels: valoresDePrueba.fechas,
                 datasets: [
                   {
-                    data: userServices.porcentajes,
+                    data: valoresDePrueba.porcentajes,
                   },
                 ],
               }}
