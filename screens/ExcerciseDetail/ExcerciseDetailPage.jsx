@@ -14,19 +14,11 @@ const ExerciseDetailPage = ({ route }) => {
   const [excercise, setExcercise] = useState(item);
   const { authData } = useContext(AuthContext)
 
-//  const [dato1, setDato1] = useState();
- // const [dato2, setDato2] = useState();
 
   const [progress, setProgress] = useState({
     dato1: '',
     dato2: ''
   })
-
-  const saveData = () => {
-    console.log("SE GUARDA");
-
-    guardarValores(dato1, dato2);
-  };
 
   const onSend = async() => {
     
@@ -43,7 +35,6 @@ const ExerciseDetailPage = ({ route }) => {
     }
 
 
-    //await addDoc(collection(db, 'progress'), progressData)
     await addDoc(collection(db, 'users', authData.user.uid, 'progress'), progressData)
     Alert.alert('Éxito', 'Datos guardados correctamente');
     console.log(authData.user.uid)
@@ -58,11 +49,15 @@ const ExerciseDetailPage = ({ route }) => {
 
       <Text style={styles.subtitle}>{excercise.description}</Text>
 
+      
       <View style={styles.container}>
-        <TextInput
+
+        {authData ? (
+          <>
+            <TextInput
           style={styles.textInput}
           placeholder={
-            excercise.category === "Aeróbico" ? "Distancia Recorrida" : "Peso"
+            excercise.category === "Aeróbico" ? "Km recorridos" : "Peso"
           }
           autoCapitalize="none"
           onChangeText={(text) => setProgress({...progress, dato1: text})}
@@ -72,7 +67,7 @@ const ExerciseDetailPage = ({ route }) => {
           style={styles.textInput}
           placeholder={
             excercise.category === "Aeróbico"
-              ? "Tiempo"
+              ? "Minutos"
               : "Cantidad de repeticiones"
           }
           autoCapitalize="none"
@@ -80,12 +75,13 @@ const ExerciseDetailPage = ({ route }) => {
           keyboardType="number-pad"
         />
         <Button title="Guardar datos" onPress={onSend} />
+        <Progress exerciseName={excercise.name}/> 
+          
+          </>
+        ): <Text>Para mirar tu progreso inicia sesion</Text>}
         
-        {authData ? <Progress exerciseName={excercise.name}/> 
-          : 
-          <Text>Para mirar tu progreso inicia sesion</Text>
+        
 
-        }
         
 
       </View>
