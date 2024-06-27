@@ -5,7 +5,7 @@ import styles from "./excerciseDetailStyles";
 import { guardarValores } from "../../services/User/userServices";
 import AuthContext from "../../services/AuthContext";
 
-
+import Progress from "../../components/Progress/Progress";
 import { db } from "../../credentials";
 import { collection, addDoc } from "firebase/firestore";
 
@@ -79,6 +79,14 @@ const ExerciseDetailPage = ({ route }) => {
           keyboardType="number-pad"
         />
         <Button title="Guardar datos" onPress={onSend} />
+        
+        {authData ? <Progress/> 
+          : 
+          <Text>Para mirar tu progreso inicia sesion</Text>
+
+        }
+        
+
       </View>
     </SafeAreaView>
   );
