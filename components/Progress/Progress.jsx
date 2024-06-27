@@ -1,17 +1,38 @@
 import { Text, View } from "react-native";
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Card } from "@rneui/themed";
 import AuthContext from "../../services/AuthContext";
+import ProgressItem from "../ProgressItem/ProgressItem";
 
 
 import { db } from "../../credentials";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, query, onSnapshot, QuerySnapshot } from "firebase/firestore";
 
 export default () => {
     const { authData } = useContext(AuthContext)
+    const [progress, setProgress] = useState([])
+
+    useEffect(()=>{
+      const collectionRef = collection(db, 'users', authData.user.uid, 'progress')
+      const q = query(collectionRef)
+
+      const unsuscribe = onSnapshot(q, querySnapshot => {
+        setProgress(
+          querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            km: doc.data().km,
+            min: doc.data().min
+          }))
+        )
+      })
+      return unsuscribe
+    }, [])
+
+
   return (
     <View>
-        <Text>{authData.user.uid}</Text>
+        <Text>Datos de tus entrenamientos</Text>
+        {progress.map(progress => <ProgressItem key={progress.id}{...progress} />)}
     </View>
   );
 };
