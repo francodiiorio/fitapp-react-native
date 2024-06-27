@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Button, Alert } from "react-native";
+import { Text, View, TextInput, Button, Alert, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState, useContext } from "react";
 import styles from "./excerciseDetailStyles";
@@ -42,6 +42,7 @@ const ExerciseDetailPage = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <View style={styles.header}>
         <Text style={styles.title}>{excercise.name}</Text>
       </View>
@@ -75,7 +76,10 @@ const ExerciseDetailPage = ({ route }) => {
           keyboardType="number-pad"
         />
         <Button title="Guardar datos" onPress={onSend} />
-        <Progress exerciseName={excercise.name}/> 
+        <View style={styles.containerFlatList}>
+        <Progress  exerciseName={excercise.name}/> 
+        </View>
+        
           
           </>
         ): <Text>Para mirar tu progreso inicia sesion</Text>}
@@ -85,6 +89,7 @@ const ExerciseDetailPage = ({ route }) => {
         
 
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 20 * 2,
   },
+  containerFlatList: {
+    padding: 20
+  },
   textInput: {
     width: 250,
     height: 50,

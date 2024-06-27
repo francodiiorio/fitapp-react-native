@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View, FlatList } from "react-native";
 import { useContext, useEffect, useState } from "react"
 import { Card } from "@rneui/themed";
 import AuthContext from "../../services/AuthContext";
@@ -33,6 +33,7 @@ export default ({exerciseName}) => {
   return (
     <View>
         <Text>Datos de tus entrenamientos</Text>
+        
         {progress.map(progress => <ProgressItem key={progress.id}{...progress} />)}
     </View>
   );
