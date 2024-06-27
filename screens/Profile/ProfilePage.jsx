@@ -96,7 +96,7 @@ const ProfilePage = () => {
         <View style={styles.container}>
           <View style={styles.header}>
             <Text style={styles.title}>Dashboard</Text>
-            <Ionicons.Button name="settings-outline" size={20} color={COLORS.primary} backgroundColor={COLORS.white} paddingLeft={18} onPress={handleLogout} />
+            <Ionicons.Button name="log-out-outline" size={20} color={COLORS.primary} backgroundColor={COLORS.white} paddingLeft={18} onPress={handleLogout} />
           </View>
           <ScrollView contentContainerStyle={styles.ScrollView}>
             <View style={styles.chartContainer}>
