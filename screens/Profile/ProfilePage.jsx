@@ -32,11 +32,12 @@ const ProfilePage = () => {
   useEffect(() => {
     if (authData){
       const collectionRef = collection(db, 'users', authData.user.uid, 'progress');
-    const q = query(collectionRef, where('ejercicio', 'in', ['Ciclismo', 'Running']));
+    const q = query(collectionRef, where('ejercicio', 'in', ['Ciclismo', 'Running', 'Nadar']));
 
     const unsubscribe = onSnapshot(q, querySnapshot => {
       let kmBici = 0;
       let kmCorriendo = 0;
+      let kmNadando = 0;
 
       querySnapshot.forEach(doc => {
         const data = doc.data();
@@ -44,26 +45,21 @@ const ProfilePage = () => {
           kmBici += data.km;
         } else if (data.ejercicio === 'Running') {
           kmCorriendo += data.km;
+        }else if (data.ejercicio === 'Nadar') {
+          kmNadando += data.km;
         }
       });
 
       setDataPie([
         { name: 'Ciclismo', population: kmBici, color: COLORS.primary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
         { name: 'Running', population: kmCorriendo, color: '#F004', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+        { name: 'Nadar', population: kmCorriendo, color: COLORS.secondary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
       ]);
     });
     return unsubscribe
     }
   }, [])
 
-  const dataBar = {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [
-      {
-        data: [20, 45, 28, 80, 99, 43]
-      }
-    ]
-  };
   const dataLine = {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
