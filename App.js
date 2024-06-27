@@ -5,6 +5,7 @@ import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LoginPage from "./screens/Login/LoginPage";
 import ExcerciseListPage from "./screens/ExcerciseList/ExcerciseListPage";
 import RegisterPage from "./screens/Register/RegisterPage";
+import SettingsPage from "./screens/Profile/SettingsPage";
 
 import { useEffect, useState } from "react";
 import { appFirebase, auth } from "./credentials";
@@ -60,6 +61,11 @@ export default function App() {
           <Stack.Screen
             name="RegisterPage"
             component={RegisterPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SettingsPage"
+            component={SettingsPage}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
