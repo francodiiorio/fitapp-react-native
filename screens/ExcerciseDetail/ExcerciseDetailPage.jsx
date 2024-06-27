@@ -34,6 +34,7 @@ const ExerciseDetailPage = ({ route }) => {
 
       km: parseInt(progress.dato1),
       min: parseInt(progress.dato2),
+      ejercicio: excercise.name
 
     };
 
@@ -80,7 +81,7 @@ const ExerciseDetailPage = ({ route }) => {
         />
         <Button title="Guardar datos" onPress={onSend} />
         
-        {authData ? <Progress/> 
+        {authData ? <Progress exerciseName={excercise.name}/> 
           : 
           <Text>Para mirar tu progreso inicia sesion</Text>
 

@@ -16,6 +16,7 @@ export default function ProgressItem({
             <View style={styles.textWrapper}>
                 <Text>{km}km</Text>
                 <Text>{min}min</Text>
+                
             </View>
         </View>
     )

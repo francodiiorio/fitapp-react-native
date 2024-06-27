@@ -6,22 +6,23 @@ import ProgressItem from "../ProgressItem/ProgressItem";
 
 
 import { db } from "../../credentials";
-import { collection, addDoc, query, onSnapshot, QuerySnapshot } from "firebase/firestore";
+import { collection, addDoc, query, onSnapshot, QuerySnapshot, where } from "firebase/firestore";
 
-export default () => {
+export default ({exerciseName}) => {
     const { authData } = useContext(AuthContext)
     const [progress, setProgress] = useState([])
 
     useEffect(()=>{
       const collectionRef = collection(db, 'users', authData.user.uid, 'progress')
-      const q = query(collectionRef)
+      const q = query(collectionRef, where('ejercicio', '==', exerciseName))
 
       const unsuscribe = onSnapshot(q, querySnapshot => {
         setProgress(
           querySnapshot.docs.map(doc => ({
             id: doc.id,
             km: doc.data().km,
-            min: doc.data().min
+            min: doc.data().min,
+            ejercicio: doc.data().ejercicio
           }))
         )
       })
