@@ -33,7 +33,6 @@ const ExerciseDetailPage = ({ route }) => {
     };
 
     addData(progressData, authData.user.uid);
-
   }
 
   return (
