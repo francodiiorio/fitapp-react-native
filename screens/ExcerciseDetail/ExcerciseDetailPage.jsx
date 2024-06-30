@@ -28,7 +28,8 @@ const ExerciseDetailPage = ({ route }) => {
 
       km: parseInt(progress.dato1),
       min: parseInt(progress.dato2),
-      ejercicio: excercise.name
+      ejercicio: excercise.name,
+      vel: parseInt(parseInt(progress.dato1) / parseInt(progress.dato2))
 
     };
 

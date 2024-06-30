@@ -6,15 +6,16 @@ import styles from "./TrainingItemStyle";
 export default function TainingItem({
     id,
     km,
-    min
+    min,
+    vel
 }) {
     return(
         <View style={styles.container}>
             <Text>Detalle de ejericio</Text>
             <View style={styles.textWrapper}>
-                <Text>{km}km</Text>
-                <Text>{min}min</Text>
-                
+                <Text>Distancia: {km}km</Text>
+                <Text>Tiempo: {min}min</Text>
+                <Text>Vel. promedio:{vel}km/min</Text>
             </View>
         </View>
     )

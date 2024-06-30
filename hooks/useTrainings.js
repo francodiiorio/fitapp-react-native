@@ -34,8 +34,7 @@ const useTrainings = (exerciseName, userId) => {
           setProgress(
             querySnapshot.docs.map(doc => ({
               id: doc.id,
-              km: doc.data().km,
-              min: doc.data().min,
+              ...doc.data(),
               ejercicio: doc.data().ejercicio
             }))
           )
