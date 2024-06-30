@@ -5,7 +5,6 @@ export default ({ excercise: excercise }) => {
     <Card>
       <Card.Title>{excercise.name}</Card.Title>
       <Card.Divider></Card.Divider>
-      <Text> {excercise.type}</Text>
     </Card>
   );
 };

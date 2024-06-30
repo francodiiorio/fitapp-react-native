@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { collection, query, onSnapshot, where, addDoc } from "firebase/firestore"
 import { db } from "../credentials"
 
-const useFirestore = (exerciseName, userId) => {
+const useTrainings = (exerciseName, userId) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState();
     const [progress, setProgress] = useState([])
@@ -15,7 +15,7 @@ const useFirestore = (exerciseName, userId) => {
           throw new Error('Por favor, ingrese valores numéricos válidos.');
         }
 
-        await addDoc(collection(db, 'users', userId, 'progress'), newData)
+        await addDoc(collection(db, 'users', userId, 'training'), newData)
     
     }
 
@@ -27,7 +27,7 @@ const useFirestore = (exerciseName, userId) => {
           console.log(userId);
           console.log(exerciseName);
 
-        const collectionRef = collection(db, 'users', userId, 'progress')
+        const collectionRef = collection(db, 'users', userId, 'training')
         const q = query(collectionRef, where('ejercicio', '==', exerciseName))
   
         const unsuscribe = onSnapshot(q, querySnapshot => {
@@ -49,4 +49,4 @@ const useFirestore = (exerciseName, userId) => {
     return {addData, progress}
 }
 
-export default useFirestore
+export default useTrainings

@@ -31,8 +31,8 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (authData){
-      const collectionRef = collection(db, 'users', authData.user.uid, 'progress');
-      const q = query(collectionRef, where('ejercicio', 'in', ['Ciclismo', 'Running', 'Nadar']));
+      const collectionRef = collection(db, 'users', authData.user.uid, 'training');
+      const q = query(collectionRef, where('ejercicio', 'in', ['ciclismo', 'running', 'nado']));
 
     const unsubscribe = onSnapshot(q, querySnapshot => {
       let kmBici = 0;
@@ -41,19 +41,19 @@ const ProfilePage = () => {
 
       querySnapshot.forEach(doc => {
         const data = doc.data();
-        if (data.ejercicio === 'Ciclismo') {
+        if (data.ejercicio === 'ciclismo') {
           kmBici += data.km;
-        } else if (data.ejercicio === 'Running') {
+        } else if (data.ejercicio === 'running') {
           kmCorriendo += data.km;
-        }else if (data.ejercicio === 'Nadar') {
+        }else if (data.ejercicio === 'nado') {
           kmNadando += data.km;
         }
       });
 
       setDataPie([
-        { name: 'Ciclismo', population: kmBici, color: COLORS.primary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
-        { name: 'Running', population: kmCorriendo, color: '#F004', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-        { name: 'Nadar', population: kmNadando, color: COLORS.secondary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
+        { name: 'ciclismo', population: kmBici, color: COLORS.primary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
+        { name: 'running', population: kmCorriendo, color: '#F004', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+        { name: 'nado', population: kmNadando, color: COLORS.secondary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
       ]);
     });
     return unsubscribe

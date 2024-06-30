@@ -4,8 +4,10 @@ import { useCallback, useState } from "react";
 import Excercise from "../../components/Excercise/index.js";
 import listOfExcercises from "../../services/Excercises/index.js";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import useSports from "../../hooks/useSports.js";
 
 const ExercisesListPage = ({ route }) => {
+  const {sports} = useSports();
   const { category } = route.params;
   const navigation = useNavigation();
   const [excercises, setExcercises] = useState([]);
@@ -37,7 +39,7 @@ const ExercisesListPage = ({ route }) => {
       <Text>Ejercicios</Text>
 
       <FlatList
-        data={excercises}
+        data={sports}
         renderItem={({ item }) => (
           
           

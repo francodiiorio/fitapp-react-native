@@ -1,11 +1,9 @@
 import { Text, View } from "react-native";
-import { useContext, useEffect, useState } from "react"
-import { Card } from "@rneui/themed";
 import AuthContext from "../../services/AuthContext";
-import styles from "./progressItemStyle";
+import styles from "./TrainingItemStyle";
 
 
-export default function ProgressItem({
+export default function TainingItem({
     id,
     km,
     min

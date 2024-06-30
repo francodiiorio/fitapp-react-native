@@ -5,8 +5,8 @@ import styles from "./excerciseDetailStyles";
 import { guardarValores } from "../../services/User/userServices";
 import AuthContext from "../../services/AuthContext";
 
-import useFirestore from "../../hooks/useFirestore";
-import Progress from "../../components/Progress/Progress";
+import useTrainings from "../../hooks/useTrainings";
+import Training from "../../components/Training/Training";
 import { db } from "../../credentials";
 import { collection, addDoc } from "firebase/firestore";
 
@@ -14,7 +14,7 @@ const ExerciseDetailPage = ({ route }) => {
   const { item } = route.params;
   const [excercise, setExcercise] = useState(item);
   const { authData } = useContext(AuthContext)
-  const { addData } = useFirestore()
+  const { addData } = useTrainings()
 
 
   const [progress, setProgress] = useState({
@@ -53,7 +53,7 @@ const ExerciseDetailPage = ({ route }) => {
             <TextInput
           style={styles.textInput}
           placeholder={
-            excercise.category === "Aeróbico" ? "Km recorridos" : "Peso"
+            excercise.type === "aerobic" ? "Km recorridos" : "Peso"
           }
           autoCapitalize="none"
           onChangeText={(text) => setProgress({...progress, dato1: text})}
@@ -62,7 +62,7 @@ const ExerciseDetailPage = ({ route }) => {
         <TextInput
           style={styles.textInput}
           placeholder={
-            excercise.category === "Aeróbico"
+            excercise.type === "aerobic"
               ? "Minutos"
               : "Cantidad de repeticiones"
           }
@@ -72,7 +72,7 @@ const ExerciseDetailPage = ({ route }) => {
         />
         <Button title="Guardar datos" onPress={onSend} />
         <View style={styles.containerFlatList}>
-        <Progress  exerciseName={excercise.name}/> 
+        <Training  exerciseName={excercise.name}/> 
         </View>
         
           
