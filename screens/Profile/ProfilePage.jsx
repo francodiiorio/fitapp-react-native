@@ -8,17 +8,10 @@ import AuthContext from "../../services/AuthContext";
 import styles from "./profileStyle"
 import { COLORS, SIZES } from "../../constants"
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native'
-import { db } from "../../credentials";
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from 'react-native-chart-kit'
+import { LineChart } from 'react-native-chart-kit'
+
+import Chart from '../../components/Chart/Chart'
 
 const auth = getAuth(appFirebase);
 
@@ -27,39 +20,7 @@ const ProfilePage = () => {
   const { authData, setAuthData } = useContext(AuthContext)
   const screenWidth = Dimensions.get('window').width;
   const navigation = useNavigation()
-  const [dataPie, setDataPie] = useState([]);
-
-  useEffect(() => {
-    if (authData){
-      const collectionRef = collection(db, 'users', authData.user.uid, 'training');
-      const q = query(collectionRef, where('ejercicio', 'in', ['ciclismo', 'running', 'nado']));
-
-    const unsubscribe = onSnapshot(q, querySnapshot => {
-      let kmBici = 0;
-      let kmCorriendo = 0;
-      let kmNadando = 0;
-
-      querySnapshot.forEach(doc => {
-        const data = doc.data();
-        if (data.ejercicio === 'ciclismo') {
-          kmBici += data.km;
-        } else if (data.ejercicio === 'running') {
-          kmCorriendo += data.km;
-        }else if (data.ejercicio === 'nado') {
-          kmNadando += data.km;
-        }
-      });
-
-      setDataPie([
-        { name: 'ciclismo', population: kmBici, color: COLORS.primary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
-        { name: 'running', population: kmCorriendo, color: '#F004', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-        { name: 'nado', population: kmNadando, color: COLORS.secondary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
-      ]);
-    });
-    return unsubscribe
-    }
-  }, [])
-
+  
   const dataLine = {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
@@ -97,16 +58,7 @@ const ProfilePage = () => {
           <ScrollView contentContainerStyle={styles.ScrollView}>
             <View style={styles.chartContainer}>
               <View style={styles.chartBox}>
-                <PieChart
-                  data={dataPie}
-                  width={screenWidth * 0.9}
-                  height={220}
-                  chartConfig={styles.chartConfigPie}
-                  accessor="population"
-                  backgroundColor="transparent"
-                  paddingLeft="15"
-                  absolute
-                />
+                <Chart authData={authData}/>
               </View>
             </View>
             <View style={styles.chartContainer}>

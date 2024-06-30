@@ -1,23 +1,34 @@
+import React, { useState, useEffect } from "react"
+import { collection, query, onSnapshot, where, addDoc, getDocs } from "firebase/firestore"
+import { db } from "../../credentials"
+import { COLORS } from "../../constants";
 
+export const subscribeToTrainingData = (userId, callback) => {
+  const collectionRef = collection(db, 'users', userId, 'training');
+  const q = query(collectionRef, where('ejercicio', 'in', ['ciclismo', 'running', 'nado']));
 
-//PROMESIFICAR agregar conexión con la Base final
-const pieData = [
-  { name: 'Seoul', population: 21500000, color: 'rgba(131, 167, 234, 1)', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-  { name: 'Toronto', population: 2800000, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-  { name: 'Beijing', population: 527612, color: 'red', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-  { name: 'New York', population: 8538000, color: '#ffffff', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-  { name: 'Moscow', population: 11920000, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 }
-]
+  return onSnapshot(q, querySnapshot => {
+    let kmBici = 0;
+    let kmCorriendo = 0;
+    let kmNadando = 0;
 
-  const getPieData = () => {
-    return new Promise((resolve,reject) => {
+    querySnapshot.forEach(doc => {
+      const data = doc.data();
+      if (data.ejercicio === 'ciclismo') {
+        kmBici += data.km;
+      } else if (data.ejercicio === 'running') {
+        kmCorriendo += data.km;
+      } else if (data.ejercicio === 'nado') {
+        kmNadando += data.km;
+      }
+    });
 
+    const trainingData = [
+      { name: 'ciclismo', population: kmBici, color: COLORS.primary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
+      { name: 'running', population: kmCorriendo, color: '#F004', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+      { name: 'nado', population: kmNadando, color: COLORS.secondary, legendFontColor: '#7F7F7F', legendFontSize: 15 },
+    ];
 
-      return resolve(pieData)
-    })
-
-  }
-
-
-
-export default {getPieData}
+    callback(trainingData); 
+  });
+};
