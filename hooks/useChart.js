@@ -1,17 +1,25 @@
 import { useState, useEffect } from "react"; 
-import { subscribeToTrainingData } from "../services/Charts";
+import { subscribeToTrainingData, subscribeToMonthlyTrainingData } from "../services/Charts";
 
-const useTrainingData = (authData) => {
-    const [dataPie, setDataPie] = useState([]);
+const useTrainingData = (authData, type) => {
+    const [data, setData] = useState([0]);
   
     useEffect(() => {
+      const km = data.km ? Number(data.km) : 0;
+      if (isNaN(km)) return;
       if (authData) {
-        const unsubscribe = subscribeToTrainingData(authData.user.uid, setDataPie);
-        return () => unsubscribe();
+        let unsubscribe;
+        if (type === "pie") {
+          unsubscribe = subscribeToTrainingData(authData.user.uid, setData);
+        } else if (type === "line") {
+          unsubscribe = subscribeToMonthlyTrainingData(authData.user.uid, setData);
+        }
+        
+        return () => unsubscribe && unsubscribe();
       }
-    }, [authData]);
+    }, []);
   
-    return dataPie;
+    return data;
   };
   
   export default useTrainingData;

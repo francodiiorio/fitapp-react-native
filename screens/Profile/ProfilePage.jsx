@@ -17,6 +17,7 @@ const auth = getAuth(appFirebase);
 
 const ProfilePage = () => {
 
+
   const { authData, setAuthData } = useContext(AuthContext)
   const screenWidth = Dimensions.get('window').width;
   const navigation = useNavigation()
@@ -61,22 +62,7 @@ const ProfilePage = () => {
                 <Chart authData={authData}/>
               </View>
             </View>
-            <View style={styles.chartContainer}>
-              
-            </View>
-            <View style={styles.chartContainer}>
-              <View style={styles.chartBox}>
-                <LineChart
-                  data={dataLine}
-                  width={screenWidth * 0.9}
-                  height={220}
-                  chartConfig={styles.chartConfigLine}
-                  bezier
-                />
-              </View>
-            </View>
-            <View style={styles.chartContainer}>
-            </View>
+            
           </ScrollView>
         </View>
       ) : (

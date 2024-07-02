@@ -32,3 +32,33 @@ export const subscribeToTrainingData = (userId, callback) => {
     callback(trainingData); 
   });
 };
+
+
+export const subscribeToMonthlyTrainingData = (userId, callback) => {
+  const collectionRef = collection(db, 'users', userId, 'training');
+  const q = query(collectionRef);
+
+  return onSnapshot(q, querySnapshot => {
+    const monthlyData = {};
+
+    querySnapshot.forEach(doc => {
+      const data = doc.data();
+      const date = data.date.toDate(); // Convertir a objeto Date
+      const month = date.getMonth(); // Obtener el mes (0-11)
+
+      if (!monthlyData[month]) {
+        monthlyData[month] = 0;
+      }
+      monthlyData[month] += data.km;
+    });
+
+    const formattedData = Object.keys(monthlyData).map(month => ({
+      month: parseInt(month) + 1, // Ajustar el índice del mes (1-12)
+      km: monthlyData[month]
+    }));
+
+    
+
+    callback(formattedData);
+  });
+};
