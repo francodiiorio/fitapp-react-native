@@ -22,11 +22,15 @@ const TrainingChart = ({ authData }) => {
     legend: ["Kilometers per Month"] // optional
   };
 
-  console.log(formattedDataLine.datasets)
-  const isValidData = dataLine.every(item => !isNaN(item.km));
   
-    if (!dataPie.length || !isValidData) {
+
+  const isValidData = dataLine.every(item => isNaN(item.km));
+  console.log(isValidData)
+  
+    if (!dataPie.length || isValidData) {
       return <Text>Loading...</Text>;
+    } else {
+
     }
   
     return (
