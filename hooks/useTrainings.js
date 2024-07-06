@@ -11,7 +11,7 @@ const useTrainings = (exerciseName, userId) => {
     const addData = async(newData, userId) => {
     
         if (isNaN(newData.km) || isNaN(newData.min)) {
-            console.log(newData)
+            // console.log(newData)
           throw new Error('Por favor, ingrese valores numéricos válidos.');
         }
 
@@ -24,8 +24,8 @@ const useTrainings = (exerciseName, userId) => {
             return
         }
 
-          console.log(userId);
-          console.log(exerciseName);
+          // console.log(userId);
+          // console.log(exerciseName);
 
         const collectionRef = collection(db, 'users', userId, 'training')
         const q = query(collectionRef, where('ejercicio', '==', exerciseName))

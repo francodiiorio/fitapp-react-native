@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import categorys from "../../services/categorys/index.js";
 import TypeOfExcercises from "../../components/TypeOfExcercises/index.js";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import styles from './exercisesStyle.js';
 
 const ExercisesPage = () => {
   const navigation = useNavigation();
@@ -28,13 +29,13 @@ const ExercisesPage = () => {
 
   return (
     <SafeAreaView>
-      <Text>Ejercicios</Text>
+      <Text style= {styles.subtitle}>Categorias</Text>
 
       <FlatList
         data={Categorys}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={()=> goToExcerciseType(item)}>
-            <TypeOfExcercises group={item} />
+          <TouchableOpacity  onPress={()=> goToExcerciseType(item)}>
+            <TypeOfExcercises  group={item} />
           </TouchableOpacity>
         )}
       />

@@ -1,6 +1,5 @@
 const categorys = [
-  {  name: "Gym" },
-  {  name: "Aeróbico" }
+  {  name: "Aeróbico" },
 ];
 
 

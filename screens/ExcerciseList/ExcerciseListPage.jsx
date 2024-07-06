@@ -5,8 +5,10 @@ import Excercise from "../../components/Excercise/index.js";
 import listOfExcercises from "../../services/Excercises/index.js";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import useSports from "../../hooks/useSports.js";
+import styles from "./excerciseListStyle.js";
 
 const ExercisesListPage = ({ route }) => {
+
   const {sports} = useSports();
   const { category } = route.params;
   const navigation = useNavigation();
@@ -16,7 +18,6 @@ const ExercisesListPage = ({ route }) => {
     navigation.navigate("ExcerciseDetailPage", { item });
   };
 
-  // console.log(type);
 
   useFocusEffect(
     useCallback(() => {
@@ -32,13 +33,12 @@ const ExercisesListPage = ({ route }) => {
         });
     }, [])
   );
-  // console.log(excercises);
 
   return (
     <SafeAreaView>
-      <Text>Ejercicios</Text>
+      <Text style= {styles.subtitle}>{category.name}</Text>
 
-      <FlatList
+      <FlatList style={styles}
         data={sports}
         renderItem={({ item }) => (
           
