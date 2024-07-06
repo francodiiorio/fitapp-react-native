@@ -28,7 +28,7 @@ const TrainingChart = ({ authData }) => {
   console.log(isValidData)
   
     if (!dataPie.length || isValidData) {
-      return <Text>Loading...</Text>;
+      return <Text>No tienes estadisticas de entrenamientos para mostrar actuamente</Text>;
     } else {
 
     }
