@@ -29,9 +29,7 @@ const TrainingChart = ({ authData }) => {
   
     if (!dataPie.length || isValidData) {
       return <Text>No tienes estadisticas de entrenamientos para mostrar actuamente</Text>;
-    } else {
-
-    }
+    } 
   
     return (
       <ScrollView>
