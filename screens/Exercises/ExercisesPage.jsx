@@ -2,10 +2,7 @@ import { FlatList, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useCallback, useState } from "react";
 
-import {
-  getCategorys,
-  getUniqueTypes,
-} from "../../services/categorys/index.js";
+import getUniqueTypes from "../../services/categorys/index.js";
 import TypeOfExcercises from "../../components/TypeOfExcercises/index.js";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import styles from "./exercisesStyle.js";
@@ -15,12 +12,12 @@ const ExercisesPage = () => {
   const [Categorys, setCategorys] = useState([]);
 
   const goToExcerciseType = (category) => {
-    navigation.navigate("ExcerciseListPage",  category);
+    navigation.navigate("ExcerciseListPage", category);
   };
 
   useFocusEffect(
     useCallback(() => {
-      getUniqueTypes()
+     getUniqueTypes()
         .then((types) => {
           setCategorys(types);
         })
@@ -29,18 +26,6 @@ const ExercisesPage = () => {
         });
     }, [])
   );
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     getCategorys()
-  //       .then((group) => {
-  //         setCategorys(group);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }, [])
-  // );
 
   return (
     <SafeAreaView>

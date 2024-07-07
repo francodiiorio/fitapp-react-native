@@ -11,7 +11,7 @@ const TrainingChart = ({ authData }) => {
     const dataLine = useTrainingData(authData, "line")
 
       const formattedDataLine = {
-    labels: dataLine.map(item => `month ${item.month}`),
+    labels: dataLine.map(item => `Mes ${item.month}`),
     datasets: [
       {
         data: dataLine.map(item => item.km),
@@ -19,7 +19,7 @@ const TrainingChart = ({ authData }) => {
         strokeWidth: 2,
       }
     ],
-    legend: ["Kilometers per Month"] // optional
+    legend: ["Velocidad mensual"] 
   };
 
   

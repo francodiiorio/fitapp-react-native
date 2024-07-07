@@ -1,8 +1,8 @@
 import { db } from "../../credentials";
 import { collection, getDocs } from "firebase/firestore";
-// const dataBase = db
 
-function getUniqueTypes() {
+
+ getUniqueTypes = () => {
   return new Promise((resolve, reject) => {
     const sportsCollection = collection(db,"sports");
     getDocs(sportsCollection)
@@ -21,14 +21,5 @@ function getUniqueTypes() {
       });
   });
 }
+export default getUniqueTypes;
 
-
-const categorys = [{ name: "Aeróbico" }];
-
-const getCategorys = () => {
-  return new Promise((resolve, reject) => {
-    return resolve(categorys);
-  });
-};
-
-export { getCategorys, getUniqueTypes};
