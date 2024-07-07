@@ -1,8 +1,15 @@
-import React, { useState, useEffect } from "react"
-import { collection, query, onSnapshot, where, addDoc, getDocs } from "firebase/firestore"
-import { db } from "../credentials"
+import React, { useState, useEffect } from "react";
+import {
+  collection,
+  query,
+  onSnapshot,
+  where,
+  addDoc,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "../credentials";
 
-const useSports = () => {
+const useSports = (type) => {
   const [sports, setSports] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -10,11 +17,16 @@ const useSports = () => {
     const fetchSports = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "sports"));
-        const sportsList = querySnapshot.docs.map(doc => ({
+        const sportsList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setSports(sportsList);
+        if (type) {
+          const typeFilter = sportsList.filter((x) => x.type === type);
+          setSports(typeFilter);
+        } else {
+          setSports(sportsList);
+        }
       } catch (error) {
         console.error("Error fetching sports: ", error);
       } finally {
@@ -28,4 +40,4 @@ const useSports = () => {
   return { sports, loading };
 };
 
-export default useSports
+export default useSports;

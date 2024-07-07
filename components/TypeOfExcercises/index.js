@@ -15,7 +15,7 @@ export default ({ group: group }) => {
         </View>
 
         <View>
-          <Text style={styles.text}>{group.name}</Text>
+          <Text style={styles.text}>{group}</Text>
         </View>
       </View>
     </Card>
