@@ -1,12 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  Button,
-  Dimensions,
-  Image,
-  ScrollView,
-} from "react-native";
+import { Text, View, FlatList, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LoginPage from "../Login/LoginPage";
 import { getAuth, signOut } from "firebase/auth";
@@ -16,33 +9,35 @@ import styles from "./profileStyle";
 import { COLORS, SIZES } from "../../constants";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
-import { LineChart } from "react-native-chart-kit";
-
 import Chart from "../../components/Chart/Chart";
+import useMeta from "../../hooks/useMeta";
+import Meta from "../../components/meta/Meta.jsx";
 
 const auth = getAuth(appFirebase);
 
 const ProfilePage = () => {
   const { authData, setAuthData } = useContext(AuthContext);
-  const screenWidth = Dimensions.get("window").width;
-  const navigation = useNavigation();
+  const [isLogued, setIsLogued] = useState();
 
-  const dataLine = {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [
-      {
-        data: [20, 45, 28, 80, 99, 43],
-        color: (opacity = 1) => COLORS.primary, // optional
-        strokeWidth: 2, // optional
-      },
-    ],
-    legend: ["Rainy Days"], // optional
-  };
+  const { metas } = useMeta(authData);
+
+  // const [metasActuales, setMetasActuales] = useState();
+
+  // const logued = () => {
+  // };
+
+  // useEffect(() => {
+  //   if (authData){
+  //     setIsLogued(true)
+  //   }
+
+  // }, []);
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
         setAuthData(null);
+        setIsLogued(false);
         console.log("User signed out!");
       })
       .catch((error) => {
@@ -53,7 +48,7 @@ const ProfilePage = () => {
   return (
     <SafeAreaView>
       {authData ? (
-        <ScrollView contentContainerStyle={styles.ScrollView}>
+        <ScrollView style={styles.scrollViewContent}>
           <View style={styles.container}>
             <View style={styles.header}>
               <Text style={styles.title}>Dashboard</Text>
@@ -66,10 +61,21 @@ const ProfilePage = () => {
                 onPress={handleLogout}
               />
             </View>
+
             <View style={styles.chartContainer}>
               <View style={styles.chartBox}>
+                <Text style={styles.title}> SEGUIMIENTO</Text>
                 <Chart authData={authData} />
               </View>
+            </View>
+            <View>
+              <Text style={styles.title}> METAS</Text>
+
+              <FlatList
+                scrollEnabled={false}
+                data={metas}
+                renderItem={({ item }) => <Meta item={item} />}
+              />
             </View>
           </View>
         </ScrollView>

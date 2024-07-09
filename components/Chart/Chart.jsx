@@ -25,7 +25,6 @@ const TrainingChart = ({ authData }) => {
   
 
   const isValidData = dataLine.every(item => isNaN(item.km));
-  console.log(isValidData)
   
     if (!dataPie.length || isValidData) {
       return <Text>No tienes estadisticas de entrenamientos para mostrar actuamente</Text>;
