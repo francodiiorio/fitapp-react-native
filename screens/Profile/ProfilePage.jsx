@@ -11,7 +11,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import Chart from "../../components/Chart/Chart";
 import useMeta from "../../hooks/useMeta";
-import Meta from "../../components/meta/Meta.jsx";
+import MetaComponent from "../../components/MetaComponent/MetaComponent";
+
+
 
 const auth = getAuth(appFirebase);
 
@@ -74,7 +76,7 @@ const ProfilePage = () => {
               <FlatList
                 scrollEnabled={false}
                 data={metas}
-                renderItem={({ item }) => <Meta item={item} />}
+                renderItem={({ item }) => <MetaComponent item={item} />}
               />
             </View>
           </View>
