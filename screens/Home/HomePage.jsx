@@ -31,6 +31,8 @@ const HomePage = () => {
   const { authData } = useContext(AuthContext);
   const { addData } = useMeta();
 
+  // const [labelInput, setLabelInput] = useState("Ingresa un valor")
+
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
   const [inputText, setInputText] = useState("");
@@ -47,7 +49,13 @@ const HomePage = () => {
         "Tipo de dato invalido",
         "Por favor, ingrese valores numéricos válidos."
       );
-    } else {
+    }else if (!selectedValue){
+      Alert.alert(
+        "Tipo de meta invalida",
+        "Ingrese una meta."
+      );
+    }
+     else {
       setModalVisible(!modalVisible);
 
       const userMeta = {
@@ -112,6 +120,11 @@ const HomePage = () => {
               <Picker
               placeholder={  { label: "Selecciona una meta:", value: "null" }}
                 onValueChange={(value) => {
+                  // if (value === "Distancia" ){
+                  //   setLabelInput("Km")
+                  // }else if(value === "Velocidad" ){
+                  //   setLabelInput("Km/h")
+                  // }
                   setSelectedValue(value);
                 }}
                 style={styles.picker}
@@ -120,7 +133,7 @@ const HomePage = () => {
                   { label: "Velocidad", value: "vel" },
                 ]}
               />
-
+              
               <TextInput
               defaultValue={"0"}
                 style={styles.input}
@@ -128,6 +141,8 @@ const HomePage = () => {
                 value={inputText}
                 onChangeText={setInputText}
               />
+              <Text style={styles.aclaracionModal}>Los valores de distancia se expresan en Km y los de velocidad en km/h</Text>
+
               <TouchableHighlight
                 onPress={() => {
                   handleMeta(inputText);

@@ -3,9 +3,12 @@ import {
   collection,
   query,
   onSnapshot,
+  
   where,
   addDoc,
 } from "firebase/firestore";
+import {Alert,
+} from "react-native";
 import { db } from "../credentials";
 
 import useMeta from "./useMeta";
@@ -17,17 +20,21 @@ const useTrainings = (exerciseName, userId) => {
   const [progress, setProgress] = useState([]);
 
   const addData = async (newData, userId) => {
-    if (isNaN(newData.km) || isNaN(newData.min)) {
-      // console.log(newData)
-      throw new Error("Por favor, ingrese valores numéricos válidos.");
-    } else {
-      await addDoc(collection(db, "users", userId, "training"), newData);
-      try {
-        await updateData(newData, userId);
-      } catch (error) {
-        console.error("Error actualizando desde useTrainings" + error);
+    // if (!newData.km || !newData.min)
+      if (isNaN(newData.km) || isNaN(newData.min)) {
+        // throw new Error("Por favor, ingrese valores numéricos válidos.");
+        Alert.alert("Por favor, ingrese valores numéricos válidos.");
+
+        // throw new Error("Por favor, ingrese valores numéricos válidos.");
+      } else {
+        await addDoc(collection(db, "users", userId, "training"), newData);
+        try {
+
+          await updateData(newData, userId);
+        } catch (error) {
+          console.error("Error actualizando desde useTrainings" + error);
+        }
       }
-    }
   };
 
   useEffect(() => {
