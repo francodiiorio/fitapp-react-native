@@ -124,6 +124,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: 'center',
   },
+  aclaracionModal: {
+    fontSize: 12,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
   label: {
     fontSize: 18,
     marginBottom: 10,
