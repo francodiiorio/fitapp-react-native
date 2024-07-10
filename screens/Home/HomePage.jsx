@@ -110,7 +110,7 @@ const HomePage = () => {
             <View style={styles.modalContainer}>
               <Text style={styles.titleModal}>Selecciona una meta:</Text>
               <Picker
-                placeholder={{}}
+              placeholder={  { label: "Selecciona una meta:", value: "null" }}
                 onValueChange={(value) => {
                   setSelectedValue(value);
                 }}
@@ -122,6 +122,7 @@ const HomePage = () => {
               />
 
               <TextInput
+              defaultValue={"0"}
                 style={styles.input}
                 placeholder="Ingresa un valor"
                 value={inputText}
